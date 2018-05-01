@@ -1,0 +1,206 @@
+<% phx_subnav_for :m_prescription %>
+
+<% provide(:prescription, "active") %>
+
+<%= form_tag( rxVerification_path, { id: "rxVerification-form", method: "get" } ) do %>
+
+
+    <div class="col-lg-10 phx-working-area-background">
+
+		<%# BEGIN Working Area TITLE and NAV %>
+		<div class="row span10 phx-working-area-nav">
+
+			<div class="col-xs-1 phx-hamburger-box">
+				<button class="phx-hamburger">|||</button>
+			</div>
+
+			<%# BEGIN Working Area TITLE %>
+			<div class="phx-working-area-title-info">
+				<row>
+					<div class="col-lg-8">
+						<div class="phx-working-area-title">Prescription Verification
+						</div>
+					</div>
+					<div class="col-lg-3 phx-working-area-title-buttons">
+					</div>
+				</row>
+			</div> <%# END of Working Area TITLE %>
+
+		</div> <%# END of Working Area TITLE and NAV %>
+
+		<%# BEGIN Working Area %>
+		<div class="containter-fluid phx-working-area-background phx-working-area-position">
+
+			<!-- Primary Info -->
+	        <div class="col-lg-4">
+
+				<div class="phx-primary-info-column">
+
+            <div class="form-group phx-input-control-spacer" style="margin-top: -8px;"></div>
+
+            <div class="col-md-12">
+                <div class="col-md-8 pull-left" style="font-weight: bold; font-family:'Arial'; font-size: 18px; margin-left: -20px; margin-top:5px;">
+                Rx Verification
+                </div>
+            </div>
+
+            <div class="form-group phx-input-control-spacer" style="margin-bottom:-20px;">&nbsp;</div>
+
+
+            <div class="form-group phx-input-control">
+                <label class="phx-form-control-label" for="rx_number">RX Number</label>
+                <%= text_field_tag :rx_number, nil, :class => "phx-form-control" %>
+            </div>
+
+            <%# imageFile = !@item.image_file_name.present? ? "no-image.png" : ("/assets/" + @item.image_file_name.to_s.strip+ ".JPG") %>
+            <%# = image_tag(imageFile, {id: "itemImageFilename", crop: :scale, class: "phx-primary-info-image"}) %>
+
+            <div class="form-group phx-input-control">
+                <label class="phx-form-control-label" for="item_name">Drug Filled</label>
+                <%= text_field_tag :item_name, nil, :class => "phx-form-control", readonly: true%>
+                <%= hidden_field_tag :item_name, nil %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="imprint_side1">IM Print Side 1</label>
+              <%= text_field_tag :imprint_side1, nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="imprint_side2">IM Print Side 2</label>
+              <%= text_field_tag :imprint_side2, nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="charity">Charity</label>
+              <%= text_field_tag :charity, nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="color">Color</label>
+              <%= text_field_tag :color, nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="coating">Coating</label>
+              <%= text_field_tag :coating, nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="flavor">Flavor</label>
+              <%= text_field_tag :flavor, nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+                <label class="phx-form-control-label" for="scored">Scored</label>
+                <%= text_field_tag :scored, nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="shape">Shape</label>
+              <%= text_field_tag :shape,nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="form-group phx-input-control">
+              <label class="phx-form-control-label" for="appearance_text">Appearance Text</label>
+              <%= text_field_tag :appearance_text,nil, :class => "phx-form-control", readonly: true %>
+            </div>
+
+            <div class="row phx-input-control">
+              <label class="phx-form-control-label" for="ndc_number">Drug Dispensed NDC</label>
+              <br/>
+              <%= text_field_tag :ndc_number, nil, :class => "phx-form-control col-md-4 col-md-offset-1" %>
+            </div>
+
+            <div class="field form-group phx-input-control-spacer">&nbsp;
+              <button type="button" onclick="javascript : verifyNDC();" class="btn btn-sm btn-default phx-btn-model-control-red col-md-3 col-md-offset-5 pull-right">Verify</button>
+					  </div>
+
+
+            <%= hidden_field_tag :real_ndc_number, nil %>
+
+				</div>
+
+			</div> <!-- end of Primary Info col lg def -->
+
+		</div> <!-- end of container fluid for Primary Info -->
+
+		<!--  -->
+        <div class="col-lg-8">
+		</div>
+
+      <div id="item_search_modal_partial">
+          <div id="itemSearchModal">
+          </div>
+      </div>
+<% end %>
+
+<script>
+
+
+    //<%#  *** ITEMS  *** %>
+
+	$(function() {
+		$("#item_modal_partial .pagination a").on("click", function() {
+			$.getScript(this.href);
+			return false;
+		});
+	});
+
+
+	function verifyNDC(){
+	    var inputNDCNumber = $('#ndc_number').val();
+
+	    if (inputNDCNumber.length == 0)
+      {
+          alert ("Please input the NDC Number");
+          return;
+      }
+
+      var realNDCNumber = $('#real_ndc_number').val();
+      if (realNDCNumber.length == 0)
+      {
+          alert ("Please validate the drug with RX Number");
+          return;
+      }
+
+      if (inputNDCNumber == realNDCNumber){
+          alert ("Verified!");
+      }
+      else{
+          alert('Wrong NDC');
+      }
+
+  }
+
+  $('#rx_number').on("keypress", function(e) {
+
+      var valRxNumber = $('#rx_number').val();
+      if (e.keyCode == 13 && valRxNumber.length > 0) {
+          $.get( "/prescription/getRxValidationInfo?rx_number=" + valRxNumber, function(data){
+              if (data.success == "true"){
+                  $('#item_name').val(data.item.item_name);
+                  $('#imprint_side1').val(data.item.imprint_side1);
+                  $('#imprint_side2').val(data.item.imprint_side2);
+                  $('#clarity').val(data.item.charity);
+                  $('#color').val(data.item.color);
+                  $('#coating').val(data.item.coating);
+                  $('#flavor').val(data.item.flavor);
+                  $('#scored').val(data.item.scored);
+                  $('#shape').val(data.item.shape);
+                  $('#appearance_text').val(data.item.appearance_text);
+                  $('#real_ndc_number').val(data.item.ndc_number);
+
+
+              }
+              else{
+                  alert(data.msg);
+              }
+          });
+
+
+          return false; // prevent the button click from happening
+      }
+  });
+
+</script>

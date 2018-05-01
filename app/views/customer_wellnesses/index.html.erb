@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Customer Wellnesses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Pharmacy</th>
+      <th>Customer</th>
+      <th>Active</th>
+      <th>Scripted calls</th>
+      <th>Medication passtime alerts</th>
+      <th>Illness monitoring</th>
+      <th>Customer remote access</th>
+      <th>Last customer access</th>
+      <th>Receive newsletter</th>
+      <th>Allow prescriber access</th>
+      <th>Last contact</th>
+      <th>Last contact type</th>
+      <th>Last assessment</th>
+      <th>Next contact date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customer_wellnesses.each do |customer_wellness| %>
+      <tr>
+        <td><%= customer_wellness.company_id %></td>
+        <td><%= customer_wellness.pharmacy_id %></td>
+        <td><%= customer_wellness.customer_id %></td>
+        <td><%= customer_wellness.active %></td>
+        <td><%= customer_wellness.scripted_calls %></td>
+        <td><%= customer_wellness.medication_passtime_alerts %></td>
+        <td><%= customer_wellness.illness_monitoring %></td>
+        <td><%= customer_wellness.customer_remote_access %></td>
+        <td><%= customer_wellness.last_customer_access %></td>
+        <td><%= customer_wellness.receive_newsletter %></td>
+        <td><%= customer_wellness.allow_prescriber_access %></td>
+        <td><%= customer_wellness.last_contact %></td>
+        <td><%= customer_wellness.last_contact_type %></td>
+        <td><%= customer_wellness.last_assessment %></td>
+        <td><%= customer_wellness.next_contact_date %></td>
+        <td><%= link_to 'Show', customer_wellness %></td>
+        <td><%= link_to 'Edit', edit_customer_wellness_path(customer_wellness) %></td>
+        <td><%= link_to 'Destroy', customer_wellness, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer wellness', new_customer_wellness_path %>

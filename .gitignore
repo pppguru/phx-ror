@@ -1,0 +1,5 @@
+.rbenv-gemsets
+tmp
+log/*
+.idea
+drug_images

@@ -1,0 +1,1 @@
+json.extract! @customer_wellness, :id, :company_id, :pharmacy_id, :customer_id, :active, :scripted_calls, :medication_passtime_alerts, :illness_monitoring, :customer_remote_access, :last_customer_access, :receive_newsletter, :allow_prescriber_access, :last_contact, :last_contact_type, :last_assessment, :next_contact_date, :created_at, :updated_at

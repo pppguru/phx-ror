@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @customer_wellness.company_id %>
+</p>
+
+<p>
+  <strong>Pharmacy:</strong>
+  <%= @customer_wellness.pharmacy_id %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @customer_wellness.customer_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @customer_wellness.active %>
+</p>
+
+<p>
+  <strong>Scripted calls:</strong>
+  <%= @customer_wellness.scripted_calls %>
+</p>
+
+<p>
+  <strong>Medication passtime alerts:</strong>
+  <%= @customer_wellness.medication_passtime_alerts %>
+</p>
+
+<p>
+  <strong>Illness monitoring:</strong>
+  <%= @customer_wellness.illness_monitoring %>
+</p>
+
+<p>
+  <strong>Customer remote access:</strong>
+  <%= @customer_wellness.customer_remote_access %>
+</p>
+
+<p>
+  <strong>Last customer access:</strong>
+  <%= @customer_wellness.last_customer_access %>
+</p>
+
+<p>
+  <strong>Receive newsletter:</strong>
+  <%= @customer_wellness.receive_newsletter %>
+</p>
+
+<p>
+  <strong>Allow prescriber access:</strong>
+  <%= @customer_wellness.allow_prescriber_access %>
+</p>
+
+<p>
+  <strong>Last contact:</strong>
+  <%= @customer_wellness.last_contact %>
+</p>
+
+<p>
+  <strong>Last contact type:</strong>
+  <%= @customer_wellness.last_contact_type %>
+</p>
+
+<p>
+  <strong>Last assessment:</strong>
+  <%= @customer_wellness.last_assessment %>
+</p>
+
+<p>
+  <strong>Next contact date:</strong>
+  <%= @customer_wellness.next_contact_date %>
+</p>
+
+<%= link_to 'Edit', edit_customer_wellness_path(@customer_wellness) %> |
+<%= link_to 'Back', customer_wellnesses_path %>
